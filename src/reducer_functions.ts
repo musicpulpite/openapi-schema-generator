@@ -1,5 +1,4 @@
-import merge from 'lodash/merge';
-import mergeWith from 'lodash/mergeWith';
+import { merge, mergeWith } from 'lodash';
 
 import ts from 'typescript';
 import { OpenAPIV3 } from 'openapi-types';
@@ -57,7 +56,7 @@ export const addPostBodyParameters = (openAPIDoc: OpenAPIV3.Document) => (interf
         return openAPIDoc;
     }
 
-    function customizer(obj, src) {
+    function customizer(obj: any, src: any) {
         if (Array.isArray(obj)) {
           return obj.concat(src);
         }
@@ -76,7 +75,7 @@ export const addPostBodyParameters = (openAPIDoc: OpenAPIV3.Document) => (interf
         const childProperties = prop.valueDeclaration.type.members?.map(member => {
             // @ts-ignore
             const childPropType = typeChecker.getTypeAtLocation(member).intrinsicName;
-            const isRequired = member.symbol.declarations?.every(d => d.questionToken === undefined);
+            const isRequired = member.symbol.declarations?.every((d: any) => d.questionToken === undefined);
 
             let childComment = ts.displayPartsToString(member.symbol.getDocumentationComment(typeChecker));
             if (parsedJsDocTags.param[member.name]) childComment = parsedJsDocTags.param[member.name];
@@ -152,7 +151,7 @@ export const addResponseSchema = (openAPIDoc: OpenAPIV3.Document) => (interfaceD
         const childProperties = prop.valueDeclaration.type.members?.map(member => {
             // @ts-ignore
             const childPropType = typeChecker.getTypeAtLocation(member).intrinsicName;
-            const isRequired = member.symbol.declarations?.every(d => d.questionToken === undefined);
+            const isRequired = member.symbol.declarations?.every((d: any) => d.questionToken === undefined);
 
             let childComment = ts.displayPartsToString(member.symbol.getDocumentationComment(typeChecker));
             if (parsedJsDocTags.param[member.name]) childComment = parsedJsDocTags.param[member.name];

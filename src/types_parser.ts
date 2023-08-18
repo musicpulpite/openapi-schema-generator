@@ -4,8 +4,6 @@ import fs from 'fs';
 import ts from 'typescript'
 import { OpenAPIV3 } from 'openapi-types';
 
-import * as ReducerFunctions from './reducer_functions'
-
 export type ParsedJsDocTags = {
     param: {[key: string]: string};
     path: string;
@@ -105,16 +103,3 @@ export default class TypesParser {
     }
 
 }
-
-const typesDirectoryPath = "../src/types/src";
-const baseOpenApiDoc = "./base_openapi.json";
-
-const typesParser = new TypesParser(typesDirectoryPath);
-typesParser.loadBaseOpenAPIDoc(JSON.parse(fs.readFileSync(path.join(__dirname, baseOpenApiDoc), 'utf8')));
-for (const f of Object.values(ReducerFunctions)) {
-    typesParser.loadReducerFunctions(f);
-}
-
-typesParser.parseTypeFiles();
-
-fs.writeFileSync(path.join(__dirname, "../openapi.json"), JSON.stringify(typesParser.getOpenAPIDoc(), null, 2));
