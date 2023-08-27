@@ -12,6 +12,8 @@
   "author": "William M.",
   "license": "ISC",
   "dependencies": {
+    "@rollup/plugin-commonjs": "^25.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.1",
     "@rollup/plugin-typescript": "^11.1.2",
     "@types/lodash": "^4.14.196",
     "commander": "^11.0.0",

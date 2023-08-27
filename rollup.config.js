@@ -1,5 +1,6 @@
-// using https://www.npmjs.com/package/@rollup/plugin-typescript
 import typescript from '@rollup/plugin-typescript';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs'
 
 export default {
   input: './src/index.ts',
@@ -8,5 +9,5 @@ export default {
     format: 'cjs',
     banner: '#!/usr/bin/env node',
   },
-  plugins: [typescript()],
+  plugins: [typescript(), nodeResolve(), commonjs()],
 };
