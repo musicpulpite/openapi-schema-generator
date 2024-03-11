@@ -1,5 +1,26 @@
 # openapi-schema-generator
 
+## Note
+This CLI utility was used for a very particular use case and is intended only as an illustrative example of how to parse a Typescript AST to extract useful information that can be translated into other languages/schemas/formats. It is almost certainly not extensible to your use-case.
+
+This CLI utility expects to iterate through a single-level directory of Typescript type files (*.d.ts) that contain interfaces of the given form and converts them into API endpoint documentation using the [openapi specification](https://spec.openapis.org/oas/latest.html).
+
+```
+ * The description for the api endpoint at /rootpath/subpathendpoint
+ * @path /rootpath/subpathendpoint
+ * @method POST
+ * @param {string} parameter1 - The first param's description
+ * @param {number} parameter2 - The second param's description
+ * @param {boolean} [parameter3] - The third param's description
+ * @description - the description of the endpoint
+ */
+export interface RootpathSubpathendpointPostRequest {
+  parameter1: string;
+  parameter2: number;
+  parameter3?: boolean;
+}
+```
+
 ## Setup
 ```
 ❯ npm install
