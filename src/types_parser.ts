@@ -23,12 +23,14 @@ export default class TypesParser {
     constructor(typesDirectoryPath: string) {
         this.typesDirectoryPath = typesDirectoryPath;
         this.typesFiles = fs.
-            readdirSync(path.join(__dirname, typesDirectoryPath)).
+            readdirSync(path.resolve(typesDirectoryPath)).
             filter(f => f.endsWith(".ts")).
             filter(f => f !== "index.ts");
 
         this.reducerFuncs = [];
         this.openAPIDoc = {} as OpenAPIV3.Document;
+
+	console.log(this.typesFiles);
     }
 
     public getOpenAPIDoc() {
@@ -49,7 +51,7 @@ export default class TypesParser {
 
     public parseTypeFiles() {
         for (const f of this.typesFiles) {
-            const mainEntryPoint = path.join(__dirname, `${this.typesDirectoryPath}/${f}`);
+            const mainEntryPoint = path.resolve(this.typesDirectoryPath, f);
             const program = ts.createProgram([mainEntryPoint], {});
             const typeChecker = program.getTypeChecker();
             const sourceFile = program.getSourceFile(mainEntryPoint);

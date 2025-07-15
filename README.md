@@ -6,6 +6,7 @@ This CLI utility was used for a very particular use case and is intended only as
 This CLI utility expects to iterate through a single-level directory of Typescript type files (*.d.ts) that contain interfaces of the given form and converts them into API endpoint documentation using the [openapi specification](https://spec.openapis.org/oas/latest.html).
 
 ```
+/**
  * The description for the api endpoint at /rootpath/subpathendpoint
  * @path /rootpath/subpathendpoint
  * @method POST

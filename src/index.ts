@@ -14,7 +14,7 @@ const options = program.opts();
 
 const typesDirectoryPath = options.typesDirectory;
 const baseOpenApiDoc = options.baseOpenapiDoc;
-const outputPath = options.output || path.join(__dirname, "./openapi.json");
+const outputPath = options.output || path.resolve("./openapi.json");
 
 if (!fs.existsSync(typesDirectoryPath)) {
   console.error(`Types directory ${typesDirectoryPath} does not exist`);
@@ -23,7 +23,7 @@ if (!fs.existsSync(typesDirectoryPath)) {
 
 const typesParser = new TypesParser(typesDirectoryPath);
 if (baseOpenApiDoc && fs.existsSync(baseOpenApiDoc)) {
-  typesParser.loadBaseOpenAPIDoc(JSON.parse(fs.readFileSync(path.join(__dirname, baseOpenApiDoc), 'utf8')));
+  typesParser.loadBaseOpenAPIDoc(JSON.parse(fs.readFileSync(path.resolve(baseOpenApiDoc), 'utf8')));
 }
 for (const f of Object.values(ReducerFunctions)) {
   typesParser.loadReducerFunctions(f);
